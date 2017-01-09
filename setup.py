@@ -12,7 +12,7 @@ def read(*paths):
 
 # argparse is only a builtin in 2.7
 # I don't plan to support 2.6, but just in case I do in the future
-install_requires = ['requests']
+install_requires = ['requests','six']
 if sys.hexversion < 0x02070000:
     install_requires.append('argparse')
 

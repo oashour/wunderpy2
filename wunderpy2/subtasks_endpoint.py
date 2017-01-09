@@ -1,3 +1,5 @@
+from six import iteritems
+
 '''
 Encapsulates all tasks that can be run against the 'subtasks' endpoint
 '''
@@ -39,7 +41,7 @@ def create_subtask(client, task_id, title, completed=False):
             'title' : title,
             'completed' : completed,
             }
-    data = { key: value for key, value in data.iteritems() if value is not None }
+    data = { key: value for key, value in iteritems(data) if value is not None }
     response = client.authenticated_request(client.api.Endpoints.SUBTASKS, 'POST', data=data)
     return response.json()
 
@@ -56,7 +58,7 @@ def update_subtask(client, subtask_id, revision, title=None, completed=None):
             'title' : title,
             'completed' : completed,
             }
-    data = { key: value for key, value in data.iteritems() if value is not None }
+    data = { key: value for key, value in iteritems(data) if value is not None }
     endpoint = '/'.join([client.api.Endpoints.SUBTASKS, str(subtask_id)])
     response = client.authenticated_request(endpoint, 'PATCH', data=data)
     return response.json()
